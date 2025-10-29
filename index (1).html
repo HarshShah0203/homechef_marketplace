@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home-Cook Marketplace - Product Flow</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React and ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel Standalone for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Lucide icon components
+        const Home = ({ size = 24, className = "" }) => <i data-lucide="home" className={className} style={{ width: size, height: size }}></i>;
+        const ChefHat = ({ size = 24, className = "" }) => <i data-lucide="chef-hat" className={className} style={{ width: size, height: size }}></i>;
+        const ShoppingCart = ({ size = 24, className = "" }) => <i data-lucide="shopping-cart" className={className} style={{ width: size, height: size }}></i>;
+        const Video = ({ size = 24, className = "" }) => <i data-lucide="video" className={className} style={{ width: size, height: size }}></i>;
+        const MapPin = ({ size = 24, className = "" }) => <i data-lucide="map-pin" className={className} style={{ width: size, height: size }}></i>;
+        const Clock = ({ size = 24, className = "" }) => <i data-lucide="clock" className={className} style={{ width: size, height: size }}></i>;
+        const Settings = ({ size = 24, className = "" }) => <i data-lucide="settings" className={className} style={{ width: size, height: size }}></i>;
+        const User = ({ size = 24, className = "" }) => <i data-lucide="user" className={className} style={{ width: size, height: size }}></i>;
+        const Calendar = ({ size = 24, className = "" }) => <i data-lucide="calendar" className={className} style={{ width: size, height: size }}></i>;
+        const Bell = ({ size = 24, className = "" }) => <i data-lucide="bell" className={className} style={{ width: size, height: size }}></i>;
+        const CheckCircle = ({ size = 24, className = "" }) => <i data-lucide="check-circle" className={className} style={{ width: size, height: size }}></i>;
+        const ArrowRight = ({ size = 24, className = "" }) => <i data-lucide="arrow-right" className={className} style={{ width: size, height: size }}></i>;
+        const Play = ({ size = 24, className = "" }) => <i data-lucide="play" className={className} style={{ width: size, height: size }}></i>;
+
+        const ProfessionalProductFlow = () => {
+            const [activeView, setActiveView] = useState('overview');
+
+            React.useEffect(() => {
+                lucide.createIcons();
+            }, [activeView]);
+
+            const regionalMeals = [
+                { name: 'Rajasthani Thali', color: 'bg-orange-500' },
+                { name: 'Marathi Thali', color: 'bg-yellow-600' },
+                { name: 'Northeast Special', color: 'bg-green-600' },
+                { name: 'Bengali Special', color: 'bg-blue-600' },
+                { name: 'Gujarati Special', color: 'bg-pink-600' },
+                { name: 'Andhra Special', color: 'bg-red-600' },
+                { name: 'UP Bihar Special', color: 'bg-purple-600' }
+            ];
+
+            const OverviewView = () => (
+                <div className="space-y-8">
+                    <div className="text-center mb-12">
+                        <h1 className="text-5xl font-bold text-gray-900 mb-4">Home-Cook Marketplace</h1>
+                        <p className="text-xl text-gray-600">Connecting users with authentic home-cooked regional meals</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <button
+                            onClick={() => setActiveView('customer')}
+                            className="bg-white border-2 border-gray-200 rounded-xl p-8 hover:border-blue-500 hover:shadow-lg transition-all group"
+                        >
+                            <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-500 transition-colors">
+                                <ShoppingCart size={32} className="text-blue-600 group-hover:text-white" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-900 mb-2">Customer Flow</h3>
+                            <p className="text-gray-600">How users browse and order meals</p>
+                        </button>
+
+                        <button
+                            onClick={() => setActiveView('homecook')}
+                            className="bg-white border-2 border-gray-200 rounded-xl p-8 hover:border-green-500 hover:shadow-lg transition-all group"
+                        >
+                            <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500 transition-colors">
+                                <ChefHat size={32} className="text-green-600 group-hover:text-white" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-900 mb-2">Home Cook Flow</h3>
+                            <p className="text-gray-600">How chefs manage their service</p>
+                        </button>
+
+                        <button
+                            onClick={() => setActiveView('features')}
+                            className="bg-white border-2 border-gray-200 rounded-xl p-8 hover:border-purple-500 hover:shadow-lg transition-all group"
+                        >
+                            <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-500 transition-colors">
+                                <Settings size={32} className="text-purple-600 group-hover:text-white" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-900 mb-2">Key Features</h3>
+                            <p className="text-gray-600">Platform capabilities overview</p>
+                        </button>
+                    </div>
+                </div>
+            );
+
+            const CustomerView = () => (
+                <div className="space-y-8">
+                    <button
+                        onClick={() => setActiveView('overview')}
+                        className="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-semibold"
+                    >
+                        ← Back to Overview
+                    </button>
+
+                    <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white">
+                        <div className="flex items-center gap-4">
+                            <div className="bg-white/20 p-4 rounded-xl">
+                                <ShoppingCart size={40} />
+                            </div>
+                            <div>
+                                <h2 className="text-3xl font-bold mb-2">Customer Journey</h2>
+                                <p className="text-blue-100">Complete ordering experience from browse to delivery</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="bg-blue-100 w-10 h-10 rounded-lg flex items-center justify-center">
+                                    <span className="text-blue-600 font-bold text-lg">1</span>
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900">Browse Regional Meals</h3>
+                            </div>
+                            <div className="space-y-3">
+                                <p className="text-gray-600 mb-4">Explore authentic regional cuisines from home cooks</p>
+                                <div className="grid grid-cols-2 gap-2">
+                                    {regionalMeals.map(meal => (
+                                        <div key={meal.name} className={`${meal.color} text-white rounded-lg p-3 text-center text-sm font-semibold`}>
+                                            {meal.name}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="bg-blue-100 w-10 h-10 rounded-lg flex items-center justify-center">
+                                    <span className="text-blue-600 font-bold text-lg">2</span>
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900">Filter Preferences</h3>
+                            </div>
+                            <div className="space-y-4">
+                                <p className="text-gray-600">Customize search by dietary preferences</p>
+                                <div className="flex gap-3">
+                                    <div className="flex-1 bg-green-50 border-2 border-green-500 rounded-lg p-4 text-center">
+                                        <div className="font-bold text-green-700">Vegetarian</div>
+                                    </div>
+                                    <div className="flex-1 bg-red-50 border-2 border-red-500 rounded-lg p-4 text-center">
+                                        <div className="font-bold text-red-700">Non-Vegetarian</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="bg-blue-100 w-10 h-10 rounded-lg flex items-center justify-center">
+                                    <MapPin size={20} className="text-blue-600" />
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900">Location-Based Discovery</h3>
+                            </div>
+                            <div className="space-y-3">
+                                <p className="text-gray-600">View home cooks within 5 km radius of your location</p>
+                                <div className="bg-blue-50 rounded-lg p-4 text-center">
+                                    <div className="flex items-center justify-center gap-2">
+                                        <MapPin size={24} className="text-blue-600" />
+                                        <span className="text-2xl font-bold text-blue-600">5 KM</span>
+                                    </div>
+                                    <div className="text-sm text-gray-600 mt-2">Hyperlocal delivery zone</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="bg-blue-100 w-10 h-10 rounded-lg flex items-center justify-center">
+                                    <Video size={20} className="text-blue-600" />
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900">Video Content</h3>
+                            </div>
+                            <div className="space-y-3">
+                                <p className="text-gray-600">Watch preparation videos and reels from home cooks</p>
+                                <div className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg p-6 text-white text-center">
+                                    <Play size={32} className="mx-auto mb-2" />
+                                    <div className="font-semibold">Home Cook Stories & Reels</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="bg-blue-100 w-10 h-10 rounded-lg flex items-center justify-center">
+                                    <ShoppingCart size={20} className="text-blue-600" />
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900">Place Order</h3>
+                            </div>
+                            <div className="space-y-3">
+                                <p className="text-gray-600">Single order or recurring subscription</p>
+                                <div className="space-y-2">
+                                    <div className="bg-gray-50 border border-gray-300 rounded-lg p-3 flex items-center justify-between">
+                                        <span className="font-semibold">One-time Order</span>
+                                        <ArrowRight size={20} className="text-gray-400" />
+                                    </div>
+                                    <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg p-3 flex items-center justify-between">
+                                        <span className="font-semibold">Daily Subscription</span>
+                                        <Calendar size={20} className="text-white" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="bg-blue-100 w-10 h-10 rounded-lg flex items-center justify-center">
+                                    <CheckCircle size={20} className="text-blue-600" />
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900">Order & Track</h3>
+                            </div>
+                            <div className="space-y-3">
+                                <p className="text-gray-600">Real-time order tracking and delivery</p>
+                                <div className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                        <span className="text-sm font-semibold">Order Confirmed</span>
+                                    </div>
+                                    <ArrowRight size={16} className="text-gray-400" />
+                                </div>
+                                <div className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+                                        <span className="text-sm font-semibold">Preparing</span>
+                                    </div>
+                                    <ArrowRight size={16} className="text-gray-400" />
+                                </div>
+                                <div className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                                        <span className="text-sm font-semibold">Out for Delivery</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+
+            const HomeCookView = () => (
+                <div className="space-y-8">
+                    <button
+                        onClick={() => setActiveView('overview')}
+                        className="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-semibold"
+                    >
+                        ← Back to Overview
+                    </button>
+
+                    <div className="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl p-8 text-white">
+                        <div className="flex items-center gap-4">
+                            <div className="bg-white/20 p-4 rounded-xl">
+                                <ChefHat size={40} />
+                            </div>
+                            <div>
+                                <h2 className="text-3xl font-bold mb-2">Home Cook Management</h2>
+                                <p className="text-green-100">Complete workflow for managing cooking service</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="bg-green-100 w-10 h-10 rounded-lg flex items-center justify-center">
+                                    <User size={20} className="text-green-600" />
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900">Profile Setup</h3>
+                            </div>
+                            <div className="space-y-3">
+                                <p className="text-gray-600 mb-4">Submit required information to start cooking</p>
+                                <div className="space-y-2">
+                                    <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
+                                        <MapPin size={18} className="text-gray-400" />
+                                        <span className="text-sm font-semibold">Location Details</span>
+                                    </div>
+                                    <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
+                                        <ChefHat size={18} className="text-gray-400" />
+                                        <span className="text-sm font-semibold">Cooking Specialty</span>
+                                    </div>
+                                    <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
+                                        <User size={18} className="text-gray-400" />
+                                        <span className="text-sm font-semibold">ID Proof Verification</span>
+                                    </div>
+                                    <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
+                                        <Video size={18} className="text-gray-400" />
+                                        <span className="text-sm font-semibold">Intro & Prep Videos</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="bg-green-100 w-10 h-10 rounded-lg flex items-center justify-center">
+                                    <Calendar size={20} className="text-green-600" />
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900">Menu Management</h3>
+                            </div>
+                            <div className="space-y-3">
+                                <p className="text-gray-600 mb-4">Set weekly schedule and daily offerings</p>
+                                <div className="bg-green-50 border-2 border-green-200 rounded-lg p-4">
+                                    <div className="font-semibold text-green-800 mb-2">Weekly Menu Planning</div>
+                                    <div className="grid grid-cols-4 gap-2">
+                                        {['Mon', 'Tue', 'Wed', 'Thu'].map(day => (
+                                            <div key={day} className="bg-white rounded p-2 text-center text-xs font-semibold border border-green-300">
+                                                {day}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
+                                    <div className="font-semibold text-blue-800">Daily Menu Updates</div>
+                                    <div className="text-sm text-gray-600 mt-1">Update today's offerings in real-time</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="bg-green-100 w-10 h-10 rounded-lg flex items-center justify-center">
+                                    <Clock size={20} className="text-green-600" />
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900">Timing Configuration</h3>
+                            </div>
+                            <div className="space-y-3">
+                                <p className="text-gray-600 mb-4">Define cooking hours and order cutoff times</p>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <div className="bg-yellow-50 border border-yellow-300 rounded-lg p-3 text-center">
+                                        <div className="text-xs text-gray-600">Breakfast</div>
+                                        <div className="text-sm font-bold text-gray-800">7:00 - 10:00 AM</div>
+                                    </div>
+                                    <div className="bg-orange-50 border border-orange-300 rounded-lg p-3 text-center">
+                                        <div className="text-xs text-gray-600">Lunch</div>
+                                        <div className="text-sm font-bold text-gray-800">12:00 - 3:00 PM</div>
+                                    </div>
+                                    <div className="bg-blue-50 border border-blue-300 rounded-lg p-3 text-center">
+                                        <div className="text-xs text-gray-600">Snacks</div>
+                                        <div className="text-sm font-bold text-gray-800">4:00 - 6:00 PM</div>
+                                    </div>
+                                    <div className="bg-purple-50 border border-purple-300 rounded-lg p-3 text-center">
+                                        <div className="text-xs text-gray-600">Dinner</div>
+                                        <div className="text-sm font-bold text-gray-800">7:00 - 10:00 PM</div>
+                                    </div>
+                                </div>
+                                <div className="bg-red-50 border-2 border-red-200 rounded-lg p-3 text-center">
+                                    <Clock size={20} className="text-red-600 mx-auto mb-1" />
+                                    <div className="text-sm font-semibold text-red-800">Set Cutoff Time</div>
+                                    <div className="text-xs text-gray-600">Last order acceptance time</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="bg-green-100 w-10 h-10 rounded-lg flex items-center justify-center">
+                                    <Settings size={20} className="text-green-600" />
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900">Duty Toggle</h3>
+                            </div>
+                            <div className="space-y-4">
+                                <p className="text-gray-600">Control availability with one switch</p>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-6 text-white text-center">
+                                        <CheckCircle size={32} className="mx-auto mb-2" />
+                                        <div className="font-bold text-lg">Duty ON</div>
+                                        <div className="text-sm text-green-100">Accepting Orders</div>
+                                    </div>
+                                    <div className="bg-gray-200 rounded-xl p-6 text-gray-600 text-center">
+                                        <Bell size={32} className="mx-auto mb-2" />
+                                        <div className="font-bold text-lg">Duty OFF</div>
+                                        <div className="text-sm text-gray-500">Not Available</div>
+                                    </div>
+                                </div>
+                                <div className="bg-gray-50 rounded-lg p-3 text-center text-sm text-gray-600">
+                                    Toggle anytime to control order flow
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+
+            const FeaturesView = () => (
+                <div className="space-y-8">
+                    <button
+                        onClick={() => setActiveView('overview')}
+                        className="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-semibold"
+                    >
+                        ← Back to Overview
+                    </button>
+
+                    <div className="bg-gradient-to-r from-purple-600 to-purple-700 rounded-2xl p-8 text-white">
+                        <div className="flex items-center gap-4">
+                            <div className="bg-white/20 p-4 rounded-xl">
+                                <Settings size={40} />
+                            </div>
+                            <div>
+                                <h2 className="text-3xl font-bold mb-2">Platform Features</h2>
+                                <p className="text-purple-100">Core capabilities powering the marketplace</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="bg-purple-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                                <Video size={24} className="text-purple-600" />
+                            </div>
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">Video Content Hub</h3>
+                            <p className="text-gray-600 text-sm">Browse cooking videos and reels showcasing home cook stories and preparation methods</p>
+                        </div>
+
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                                <MapPin size={24} className="text-blue-600" />
+                            </div>
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">5 KM Hyperlocal</h3>
+                            <p className="text-gray-600 text-sm">Precise location-based filtering shows only nearby home cooks within delivery radius</p>
+                        </div>
+
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                                <ChefHat size={24} className="text-green-600" />
+                            </div>
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">Regional Cuisines</h3>
+                            <p className="text-gray-600 text-sm">7 authentic regional thali options from different parts of India</p>
+                        </div>
+
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="bg-orange-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                                <Settings size={24} className="text-orange-600" />
+                            </div>
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">Dietary Preferences</h3>
+                            <p className="text-gray-600 text-sm">Toggle between vegetarian and non-vegetarian options with easy filtering</p>
+                        </div>
+
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="bg-indigo-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                                <Calendar size={24} className="text-indigo-600" />
+                            </div>
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">Daily Subscriptions</h3>
+                            <p className="text-gray-600 text-sm">Set up recurring meal orders for daily delivery without manual reordering</p>
+                        </div>
+
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="bg-red-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                                <Clock size={24} className="text-red-600" />
+                            </div>
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">Meal Time Slots</h3>
+                            <p className="text-gray-600 text-sm">Order across four time slots: Breakfast, Lunch, Evening Snacks, and Dinner</p>
+                        </div>
+
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="bg-teal-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                                <Bell size={24} className="text-teal-600" />
+                            </div>
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">Real-time Availability</h3>
+                            <p className="text-gray-600 text-sm">Home cooks control their duty status in real-time with instant updates</p>
+                        </div>
+
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="bg-yellow-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                                <Calendar size={24} className="text-yellow-600" />
+                            </div>
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">Schedule Management</h3>
+                            <p className="text-gray-600 text-sm">Home cooks set weekly and daily menus with flexible timing configurations</p>
+                        </div>
+
+                        <div className="bg-white rounded-xl border-2 border-gray-200 p-6 hover:shadow-lg transition-shadow">
+                            <div className="bg-pink-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                                <Clock size={24} className="text-pink-600" />
+                            </div>
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">Order Cutoff Times</h3>
+                            <p className="text-gray-600 text-sm">Configurable last order time for each meal period ensuring preparation time</p>
+                        </div>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 rounded-2xl p-8">
+                        <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Platform Architecture</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="text-center">
+                                <div className="bg-blue-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <User size={28} className="text-white" />
+                                </div>
+                                <div className="font-bold text-gray-900 mb-1">Customer App</div>
+                                <div className="text-sm text-gray-600">Browse, order, track</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="bg-green-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <ChefHat size={28} className="text-white" />
+                                </div>
+                                <div className="font-bold text-gray-900 mb-1">Home Cook App</div>
+                                <div className="text-sm text-gray-600">Manage service, orders</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="bg-purple-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <Settings size={28} className="text-white" />
+                                </div>
+                                <div className="font-bold text-gray-900 mb-1">Admin Portal</div>
+                                <div className="text-sm text-gray-600">Monitor, moderate, manage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
+                        {activeView === 'overview' && <OverviewView />}
+                        {activeView === 'customer' && <CustomerView />}
+                        {activeView === 'homecook' && <HomeCookView />}
+                        {activeView === 'features' && <FeaturesView />}
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<ProfessionalProductFlow />);
+    </script>
+</body>
+</html>
